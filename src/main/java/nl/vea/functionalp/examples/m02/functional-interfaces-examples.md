@@ -1,3 +1,40 @@
+<style>
+body {
+  font-family: "Gentium Basic", Cardo , "Linux Libertine o", "Palatino Linotype", Cambria, serif;
+  font-size: 130% !important;
+}
+code {
+	padding: 0 .25em;
+	
+	white-space: pre;
+	font-family: "Tlwg mono", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+	
+	background-color: #ECFFFA;
+	//border: 1px solid #ccc;
+	//border-radius: 3px;
+}
+
+kbd {
+	display: inline-block;
+	padding: 3px 5px;
+	font-family: "Tlwg mono", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+	line-height: 10px;
+	color: #555;
+	vertical-align: middle;
+	background-color: #ECFFFA;
+	border: solid 1px #ccc;
+	border-bottom-color: #bbb;
+	border-radius: 3px;
+	box-shadow: inset 0 -1px 0 #bbb;
+}
+
+h1,h2,h3,h4,h5 {
+  color: #269B7D; 
+  font-family: "fira sans", "Latin Modern Sans", Calibri, "Trebuchet MS", sans-serif;
+}
+
+</style>
+
 # Functional Interfaces
 There are more functional interfaces than you may think. Of course, there are all new ones introduced in the
 [`java.util.function`](https://docs.oracle.com/javase/8/docs/api/java/util/function/package-frame.html) package,
@@ -22,4 +59,4 @@ expression at line 153, respectively.
 
 ## Create your own functional interfaces
 Of course if none of the existing functional interfaces meet your needs, you can always create your own, complete with any default
-method implementation you may need. But this probably won't be very often. 
+method implementation you may need. But this probably won't be necessary very often. 

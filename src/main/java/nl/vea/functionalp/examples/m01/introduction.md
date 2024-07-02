@@ -1,7 +1,44 @@
+<style>
+body {
+  font-family: "Gentium Basic", Cardo , "Linux Libertine o", "Palatino Linotype", Cambria, serif;
+  font-size: 130% !important;
+}
+code {
+	padding: 0 .25em;
+	
+	white-space: pre;
+	font-family: "Tlwg mono", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+	
+	background-color: #ECFFFA;
+	//border: 1px solid #ccc;
+	//border-radius: 3px;
+}
+
+kbd {
+	display: inline-block;
+	padding: 3px 5px;
+	font-family: "Tlwg mono", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+	line-height: 10px;
+	color: #555;
+	vertical-align: middle;
+	background-color: #ECFFFA;
+	border: solid 1px #ccc;
+	border-bottom-color: #bbb;
+	border-radius: 3px;
+	box-shadow: inset 0 -1px 0 #bbb;
+}
+
+h1,h2,h3,h4,h5 {
+  color: #269B7D; 
+  font-family: "fira sans", "Latin Modern Sans", Calibri, "Trebuchet MS", sans-serif;
+}
+
+</style>
+
 # What is a functional programming? And how is it implemented in the Java language (since version 8)?
 ## Short explanation
 In functional programming emphasis is on *what* must be done rather than *how*.
-- Queries in SQL or XPath are an example of this.
+- Queries in SQL or XPath expressions are an example of this.
 - Since Java 8 we can express this as lambda expressions (we will see lots of examples, later on)
 - The opposite of functional programming is imperative programming, where you have to specify exactly *how* things
   should be done.
@@ -12,8 +49,8 @@ In functional programming emphasis is on *what* must be done rather than *how*.
   then you need to specify exactly how this should be done.
 
 Strict functional programming also has limiting rules like encapsulating variables, which means limiting the scope of accessibility.
-So we aren't able to share globally kept state among different parts of the code. This restriction, although not enforced, is generally a good thing in imperative coding
-as well, because it
+So we aren't able to share globally kept state among different parts of the code. This restriction, although not 
+enforced, is generally a good thing in imperative coding as well, because it
   - makes thread contained concurrent programming possible,
   - is more secure,
   - less error-prone.
@@ -44,16 +81,17 @@ items? Then we could write one generic `filterApples(List<Apple> inventory, {fil
 which we would reuse for all different filter criteria use cases we have.
 
 ##### We are used to inject data arguments into a method as argument, but what would `{filter criterium function}` look like?
-- Since java is Object-Oriented, a function would be an object as well, defined by a class and declared by an interface.
+- Since java is Object-Oriented, a function would be an object as well, implemented by a class and declared by an interface.
 - As it happens the [`Predicate<T>`](https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Predicate.html) interface
   could fit the bill:
-  - it has one abstract method `boolean test(T t)`, which could be implemented to examine an Apple object (as the T object) for
-    different criteria. Whenever the criteria is met the method would return `true` otherwise it would return `false`.
+  - it has one abstract method `boolean test(T t)`, which could be implemented to examine an Apple object (as the T
+    object) for different criteria. Whenever the criterion is met the method would return `true` otherwise it would
+    return `false`.
 
 ### The second attempt [`FilteringApplesVersion02`](FilteringApplesVersion02.java)
 - This is done in [`FilteringApplesVersion02.filterApples(List<Apple> inventory, Predicate<Apple> predicate)`](FilteringApplesVersion02.java)
 - We separated the thing that varied: the filter criterium from the thing that stayed the same: iterating over the inventory and 
-  creating and filling a new list filled with every apple that meets the criterium.
+  creating and filling a new list filled with every apple that meets the criterion.
 - So now for each criterium we implement the `Predicate<Apple>` interface. 
 
 #### Room for further improvement with new Java 8 features
@@ -72,8 +110,8 @@ which we would reuse for all different filter criteria use cases we have.
   - Interfaces with methods that are not abstract, but have a default implementation are new to Java 8. 
     - This was introduced to be backward compatible.
     - This makes an interface a little less a clean interface declaration and more akin to an abstract class
-    - Default methods cannot be implemented with a lambda expression only the one abstract method can (and if there are more than one
-      abstract methods the interface is *not* functional).
+    - Default methods cannot be implemented with a lambda expression only the one abstract method can (and if there are
+      more than one abstract methods the interface is *not* functional).
 
 ### The third attempt [`FilteringApplesVersion03`](FilteringApplesVersion03.java)
 - In [`FilteringApplesVersion03.main(String... args)`](FilteringApplesVersion03.java) the Predicate implementations are lambda expressions.
@@ -99,27 +137,28 @@ input for a next step in the pipeline.
     transformed not mutated (as we mentioned earlier)
   - The functional interfaces are most conveniently implemented as lambda expressions or even method references whenever possible
     - these lambda expressions usually don't need to specify type information of the elements they process as that can be inferred.
-  - All but the last operator is an **intermediate operator**.
+  - All but the last operator are **intermediate operators**.
     - Intermediate operators will return a stream reference on which we can call another operator, thus providing for the
       **method chaining pattern**,
-    - **Intermediate operators are lazy.** This means they are evaluated and executed when the last operator or terminal operator is
-      executed. This may lead to optimizations in the order of execution and also to skipping operations on elements when they prove
-      to be redundant by the optimizations. We will see a concrete example of this later. This laziness is actually a very powerful
-      feature that can result in much better performance especially with streams derived from large datasets. 
+    - **Intermediate operators are lazy.** This means they are evaluated and executed when the last operator or 
+      **terminal operator** is executed. This may lead to optimizations in the order of execution and also to skipping
+      operations on elements when they prove to be redundant by the optimizations. We will see a concrete example of
+      this later. This laziness is actually a very powerful feature that can result in much better performance 
+      especially with streams derived from large datasets. 
       Moreover, such optimizations are difficult to achieve with imperative programming.
     - examples of intermediate operators:
-      - filter
-      - map
-      - distinct
-      - limit
-      - sorted
+      - `filter`
+      - `map`
+      - `distinct`
+      - `limit`
+      - `sorted`
   - The last operator must be a **terminal operator**. These operators
     - must return a concrete type or produce a side effect,
     - are eagerly executed, triggering the evaluation, optimization and execution of all the previous intermediate operations.
     - Examples of terminal operators:
-      - reduce
-      - collect
-      - forEach
+      - `reduce`
+      - `collect`
+      - `forEach`
 
-In module xx we will zoom in on various aspects of streams and their operators. The other modules have more emphasis on the applications
-of streams
+In module 3 we will zoom in on various aspects of streams and their operators. The other modules have more emphasis on 
+the applications of streams: [closer-look-at-streams.md](../m03/closer-look-at-streams.md)

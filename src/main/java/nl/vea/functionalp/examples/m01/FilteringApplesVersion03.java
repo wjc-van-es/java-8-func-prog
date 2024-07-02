@@ -27,10 +27,10 @@ public class FilteringApplesVersion03 {
         List<Apple> heavyApples = filterApples(inventory, apple -> apple.getWeight() > 110);
         System.out.println(heavyApples);
 
-        //Als het er alleen maar omgaat om alle groene appels te printen
+        //If the only intention is to print the green apples to standard output
         inventory.stream().filter(IsGreenApplePredicate).forEach(apple -> System.out.println(apple));
 
-        //In dit geval kan je ook een method reference gebruiken i.p.v. lambda expressie
+        //In this case, you could use a method reference instead of a lambda expression
         inventory.stream().filter(IsGreenApplePredicate).forEach(System.out::println);
 
     }
