@@ -1,6 +1,6 @@
 package nl.vea.functionalp.examples.m03;
 
-import static nl.vea.functionalp.examples.m04.Dish.menu;
+import static nl.vea.functionalp.examples.m04.Dish.MENU;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,11 +17,11 @@ public class NumericStreams {
         List<Integer> numbers = Arrays.asList(3, 4, 5, 1, 2);
 
         Arrays.stream(numbers.toArray()).forEach(System.out::println);
-        int calories = menu.stream().mapToInt(Dish::getCalories).sum();
+        int calories = MENU.stream().mapToInt(Dish::getCalories).sum();
         System.out.println("Number of calories:" + calories);
 
         // max and OptionalInt
-        OptionalInt maxCalories = menu.stream().mapToInt(Dish::getCalories).max();
+        OptionalInt maxCalories = MENU.stream().mapToInt(Dish::getCalories).max();
 
         int max;
         if (maxCalories.isPresent()) {

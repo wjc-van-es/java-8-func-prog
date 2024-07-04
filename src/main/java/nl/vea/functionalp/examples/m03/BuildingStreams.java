@@ -1,8 +1,5 @@
 package nl.vea.functionalp.examples.m03;
 
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.function.IntSupplier;
 import java.util.stream.IntStream;
@@ -28,7 +25,7 @@ public class BuildingStreams {
 
         // Fibonacci with iterate
         Stream.iterate(new int[]{0, 1}, t -> new int[]{t[1], t[0] + t[1]}).limit(10)
-                .forEach(t -> System.out.printf("(%d, %d)", t[0], t[1]));
+                .forEach(t -> System.out.printf("(%d, %d)\n", t[0], t[1]));
 
         Stream.iterate(new int[]{0, 1}, t -> new int[]{t[1], t[0] + t[1]}).limit(10).map(t -> t[0])
                 .forEach(System.out::println);
@@ -61,12 +58,6 @@ public class BuildingStreams {
 
         };
         IntStream.generate(fib).limit(10).forEach(System.out::println);
-
-        System.out.println(Paths.get(".").toAbsolutePath());
-        long uniqueWords = Files.lines(Paths.get("src/main/resources/modernjavainaction/chap05/data.txt"), Charset.defaultCharset())
-                .flatMap(line -> Arrays.stream(line.split(" "))).distinct().count();
-
-        System.out.println("There are " + uniqueWords + " unique words in data.txt");
     }
 
 }

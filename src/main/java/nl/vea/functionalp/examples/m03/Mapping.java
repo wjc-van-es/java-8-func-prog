@@ -1,7 +1,7 @@
 package nl.vea.functionalp.examples.m03;
 
 import static java.util.stream.Collectors.toList;
-import static nl.vea.functionalp.examples.m04.Dish.menu;
+import static nl.vea.functionalp.examples.m04.Dish.MENU;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +12,7 @@ public class Mapping {
 
     public static void main(String... args) {
         // map
-        List<String> dishNames = menu.stream().map(Dish::getName).collect(toList());
+        List<String> dishNames = MENU.stream().map(Dish::getName).collect(toList());
         System.out.println(dishNames);
 
         // map
@@ -35,7 +35,7 @@ public class Mapping {
                 // the lambda expression makes combinations of all elements of numbers1 with all elements of numbers2
                 // flatMap flattens the resulting streams of streams of arrays to a single stream of arrays, where each array represents a combination
                 .flatMap((Integer i) -> numbers2.stream().map((Integer j) -> new int[]{i, j}))
-                .filter(pair -> (pair[0] + pair[1]) % 3 == 0) // here only arrays whose elements are divisible by 3 are selected
+                .filter(pair -> (pair[0] + pair[1]) % 3 == 0) // here only arrays whose sum of elements are divisible by 3 are selected
                 .collect(toList());
         pairs.forEach(pair -> System.out.printf("(%d, %d)", pair[0], pair[1]));
     }

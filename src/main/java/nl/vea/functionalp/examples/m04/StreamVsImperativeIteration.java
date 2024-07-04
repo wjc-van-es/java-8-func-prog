@@ -12,12 +12,12 @@ public class StreamVsImperativeIteration {
 
     public static void main(String... args) {
         // Java 7
-        getLowCaloricDishesNamesInJava7(Dish.menu).forEach(System.out::println);
+        getLowCaloricDishesNamesInJava7(Dish.MENU).forEach(System.out::println);
 
         System.out.println("---");
 
         // Java 8
-        getLowCaloricDishesNamesInJava8(Dish.menu).forEach(System.out::println);
+        getLowCaloricDishesNamesInJava8(Dish.MENU).forEach(System.out::println);
     }
 
     /**
