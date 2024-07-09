@@ -114,7 +114,7 @@ List<Book> newBooks = new ArrayList<>();
 //getting your bookcollection        
 List<Books> bookCollection = retrieveBookCollection();
 
-//trying to add the new books to your collection like this will fail
+//trying to add the new books to your collection like this will fail at compile time.
 newBooks.steam().foreach(book -> bookCollection.add(book));
 
 ```

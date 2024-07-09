@@ -27,7 +27,7 @@ public class BuildingStreams {
         Stream.iterate(new int[]{0, 1}, t -> new int[]{t[1], t[0] + t[1]}).limit(10)
                 .forEach(t -> System.out.printf("(%d, %d)\n", t[0], t[1]));
 
-        Stream.iterate(new int[]{0, 1}, t -> new int[]{t[1], t[0] + t[1]}).limit(10).map(t -> t[0])
+        Stream.iterate(new int[]{0, 1}, t -> new int[]{t[1], t[0] + t[1]}).limit(21).mapToInt(t -> t[0])
                 .forEach(System.out::println);
 
         // random stream of doubles with Stream.generate

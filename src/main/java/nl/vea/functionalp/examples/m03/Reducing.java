@@ -45,6 +45,12 @@ public class Reducing {
         Optional<Integer> min = numbers.stream().reduce(Integer::min);
         min.ifPresent(System.out::println);
 
+        double mean = numbers.stream()
+                        .mapToDouble(i -> i)
+                                .average()
+                .orElseThrow(RuntimeException::new);
+        System.out.printf("The mean of the numbers = %4.1f\n", mean);
+
         int calories = MENU.stream().map(Dish::getCalories).reduce(0, Integer::sum);
         System.out.println("Number of calories of all dishes on the menu:" + calories);
     }
