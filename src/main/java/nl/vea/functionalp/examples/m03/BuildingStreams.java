@@ -24,10 +24,15 @@ public class BuildingStreams {
                 .forEach(System.out::println);
 
         // Fibonacci with iterate
+        System.out.println("Preparing Fibonacci with a pair seeded by an initial array with the first 2 elements {0, 1}");
+        System.out.println("Each succeeding pair contains the second element of the previous as first and" +
+                " the sum of both elements of the previous as second element");
+        System.out.println("For now these pairs are returned and printed");
         Stream.iterate(new int[]{0, 1}, t -> new int[]{t[1], t[0] + t[1]}).limit(10)
                 .forEach(t -> System.out.printf("(%d, %d)\n", t[0], t[1]));
 
-        Stream.iterate(new int[]{0, 1}, t -> new int[]{t[1], t[0] + t[1]}).limit(21).mapToInt(t -> t[0])
+        System.out.println("Creating the final Fibonacci by mapping each array to a single int by each time taking its first element");
+        Stream.iterate(new int[]{0, 1}, t -> new int[]{t[1], t[0] + t[1]}).limit(11).mapToInt(t -> t[0])
                 .forEach(System.out::println);
 
         // random stream of doubles with Stream.generate
@@ -43,6 +48,8 @@ public class BuildingStreams {
             }
         }).limit(5).forEach(System.out::println);
 
+        System.out.println("Creating Fibonacci with an IntSupplier");
+        // This supplier almost renders Fibonacci, but it starts with 1 instead of 0
         IntSupplier fib = new IntSupplier() {
 
             private int previous = 0;
@@ -57,7 +64,9 @@ public class BuildingStreams {
             }
 
         };
-        IntStream.generate(fib).limit(10).forEach(System.out::println);
+
+        // Here we concat 2 InnStream to include the first Fibonacci element 0 as fib starts with the second element
+        IntStream.concat(IntStream.of(0), IntStream.generate(fib).limit(10)).forEach(System.out::println);
     }
 
 }

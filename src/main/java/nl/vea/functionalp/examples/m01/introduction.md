@@ -1,7 +1,7 @@
 <style>
 body {
-  font-family: "Gentium Basic", Cardo , "Linux Libertine o", "Palatino Linotype", Cambria, serif;
-  font-size: 130% !important;
+  font-family: "Spectral", "Gentium Basic", Cardo , "Linux Libertine o", "Palatino Linotype", Cambria, serif;
+  font-size: 110% !important;
 }
 code {
 	padding: 0 .25em;
@@ -134,7 +134,7 @@ input for a next step in the pipeline.
 - After construction, we can link subsequent operators to a stream
   - These operators usually take a function (implementation of a functional interface) as argument and these functions
     then are applied to all the data elements that are processed through the stream, whereby these elements are
-    transformed not mutated (as we mentioned earlier)
+    transformed, _not_ mutated (as we mentioned earlier)
   - The functional interfaces are most conveniently implemented as lambda expressions or even method references whenever possible
     - these lambda expressions usually don't need to specify type information of the elements they process as that can be inferred.
   - All but the last operator are **intermediate operators**.

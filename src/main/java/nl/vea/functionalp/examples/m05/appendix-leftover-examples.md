@@ -1,7 +1,7 @@
 <style>
 body {
-  font-family: "Gentium Basic", Cardo , "Linux Libertine o", "Palatino Linotype", Cambria, serif;
-  font-size: 130% !important;
+  font-family: "Spectral", "Gentium Basic", Cardo , "Linux Libertine o", "Palatino Linotype", Cambria, serif;
+  font-size: 110% !important;
 }
 code {
 	padding: 0 .25em;
